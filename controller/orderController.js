@@ -5,6 +5,7 @@ const {
   Employee,
   Product,
   sequelize,
+  Supplier,
 } = require("../models");
 exports.getAllOrders = async (req, res, next) => {
   try {
@@ -42,6 +43,7 @@ exports.getOrder = async (req, res, next) => {
         { model: Employee, attributes: ["id", "name"] },
       ],
       attributes: ["id", "date"],
+
       where: { id },
     });
     console.log(JSON.parse(JSON.stringify(order)));
