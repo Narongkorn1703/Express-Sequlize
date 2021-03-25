@@ -55,7 +55,17 @@ exports.getOrder = async (req, res, next) => {
 exports.createOrder = async (req, res, next) => {
   const transaction = await sequelize.transaction();
   try {
-    const { date, customerId, employeeId, orderItems } = req.body;
+    const { customerId, employeeId, orderItems } = req.body;
+    const order = await Order.create(
+      {
+        date: new Date(),
+        customerId,
+        employeeId,
+      }
+      // { transaction }
+    );
+    console.log(JSON.parse(JSON.stringify(order)));
+    res.status(201).json({ order });
   } catch (err) {
     next(err);
   }
